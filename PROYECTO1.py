@@ -5,6 +5,9 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from tkinter import ttk
+from tkinter import filedialog
+from datetime import datetime
+import os
 cred = credentials.Certificate(r"D:\Javier4B\contraseñabasededatos.json")
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
@@ -77,7 +80,7 @@ def crear_botones(ventana, botones_habilitados):
 
     b1 = ttk.Button(frame_botones, text="Login", style="BotonNegro.TButton", command=lambda: mostrar_ventana1(ventana))
     b2 = ttk.Button(frame_botones, text="Inicio", style="BotonNegro.TButton", command=lambda: mostrar_ventana2(ventana))
-    b3 = ttk.Button(frame_botones, text="Pedidos y Mensaje", style="BotonNegro.TButton", command=lambda: mostrar_ventana3(ventana))
+    b3 = ttk.Button(frame_botones, text="Comentarios", style="BotonNegro.TButton", command=lambda: mostrar_ventana3(ventana))
     b4 = ttk.Button(frame_botones, text="Catalogo", style="BotonNegro.TButton", command=lambda: mostrar_ventana4(ventana))
     b5 = ttk.Button(frame_botones, text="Cotizacion", style="BotonNegro.TButton", command=lambda: mostrar_ventana5(ventana))
     b6 = ttk.Button(frame_botones, text="Factura", style="BotonNegro.TButton", command=lambda: mostrar_ventana6(ventana))
@@ -164,36 +167,93 @@ def mostrar_ventana2(ventana):
     crear_imagenes_inferiores(ventana)
     crear_botones(ventana, [True, True, True, True, True, True, True, True])
 
-    tk.Label(ventana, text="Inicio", font=("Arial", 12)).grid(row=4, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Visión: Ser tu distribuidora de maquillajes número uno", font=("Arial", 12)).grid(row=5, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Misión: Darte el mejor precio, calidad y hacerte feliz", font=("Arial", 12)).grid(row=6, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Ubicación: CBTIs 260, Puebla de Zaragoza, México", font=("Arial", 12)).grid(row=7, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Logros de la empresa:").grid(row=8, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="-Vender mas de 10,000 pesos en menos de 6 meses").grid(row=9, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="-Ser de los mejores repartidores de maquillaje").grid(row=10, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="-Ofrecer una gran calidad precio en productos segun los clientes").grid(row=11, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="-Lograr una excelente cantidad de clientes frecuentes").grid(row=12, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Inicio", font=("Impact", 20), bg="black", fg="white").grid(row=4, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Visión:", font=("Impact", 12), bg="black", fg="white").grid(row=5, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Ayudar a mas personas a mejorar su fisico y lograr mejorar tanto su salud como su bolsillo", font=("Impact", 12), bg="black", fg="white").grid(row=6, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Misión:", font=("Impact", 12), bg="black", fg="white").grid(row=7, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Crear en ti una fuerza tanto mental como fisica para que puedas lograr todos tus objetivos", font=("Impact", 12), bg="black", fg="white").grid(row=8, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Ubicación: Calle tepetitlan, Lomas del sur, Puebla", font=("Impact", 12), bg="black", fg="white").grid(row=9, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="Logros de la empresa:", font=("Impact", 12), bg="black", fg="white").grid(row=10, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="-Ser de los mejores gimnasios de la zona", font=("Impact", 12), bg="black", fg="white").grid(row=11, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="-Buenas criticas hacia el gimnasio", font=("Impact", 12), bg="black", fg="white").grid(row=12, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="-Contar con una buena cantidad de equipos", font=("Impact", 12), bg="black", fg="white").grid(row=13, column=0, columnspan=3, padx=50, pady=10)
+    tk.Label(ventana, text="-Evitar un gasto fuerte al bolsillo de los clientes", font=("Impact", 12), bg="black", fg="white").grid(row=14, column=0, columnspan=3, padx=50, pady=10)
+
+
 def mostrar_ventana3(ventana):
     limpiar_ventana(ventana)
     crear_marco_superior(ventana)
     crear_imagenes_inferiores(ventana)
-    crear_botones(ventana, [True, True, True, True, True, True, True, True])
+    crear_botones(ventana, [True]*8)
 
-    tk.Label(ventana, text="Contacto", font=("Arial", 12)).grid(row=3, column=0, columnspan=1, padx=50, pady=10)
-    tk.Label(ventana, text="Ingresa tu mensaje:", font=("Arial", 12)).grid(row=4, column=0, columnspan=1, padx=50, pady=10)
-    caja = ttk.Entry(ventana, width=50)
-    caja.grid(row=5, column=0, columnspan=1, padx=50, pady=5)
-    ttk.Button(ventana, text="Mandar", command=lambda: print("Mensaje:", caja.get())).grid(row=6, column=0, columnspan=1, pady=10)
-    tk.Label(ventana, text="Pedidos:", font=("Arial", 12)).grid(row=3, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Aceite para pestañas 5 piezas", font=("Arial", 12)).grid(row=4, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Labial 10 piezas", font=("Arial", 12)).grid(row=5, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Polvo matificante 5 piezas", font=("Arial", 12)).grid(row=6, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Gloss 10 piezas", font=("Arial", 12)).grid(row=7, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Labial mate 10 piezas", font=("Arial", 12)).grid(row=8, column=1, columnspan=2, padx=50, pady=10)
-    tk.Label(ventana, text="-Lista de contactos:", font=("Arial", 12)).grid(row=9, column=0, columnspan=1, padx=50, pady=10)
-    tk.Label(ventana, text=">Empleados recepcion: 2213892909").grid(row=10, column=0, columnspan=1, padx=50, pady=10)
-    tk.Label(ventana, text=">Jefe de empresa: 8790764567").grid(row=11, column=0, columnspan=1, padx=50, pady=10)
-    tk.Label(ventana, text=">Encargado de recepcion: 0989201898").grid(row=12, column=0, columnspan=1, padx=50, pady=10)
+    frame = tk.Frame(ventana, bg="black")
+    frame.grid(row=3, column=0, columnspan=2, pady=20)
+
+    tk.Label(frame, text="Formulario de Contacto",
+             font=("Impact", 12),
+             bg="black", fg="white").grid(row=0, column=0, columnspan=2, pady=10)
+
+
+    tk.Label(frame, text="Comentario:",
+             font=("Impact", 12),
+             bg="black", fg="white").grid(row=1, column=0, sticky="w")
+
+    caja_texto = tk.Text(frame, width=50, height=8,
+                         font=("Impact", 12))
+    caja_texto.grid(row=2, column=0, columnspan=2, pady=10)
+
+    
+    ruta_imagen = {"ruta": ""}
+
+    def seleccionar_imagen():
+        archivo = filedialog.askopenfilename(
+            filetypes=[("Imagenes", "*.png *.jpg *.jpeg *.webp")]
+        )
+        if archivo:
+            ruta_imagen["ruta"] = archivo
+            label_imagen.config(text="Imagen seleccionada ✔")
+            img = Image.open(archivo)
+            img = img.resize((150, 150))  # tamaño preview
+            img_tk = ImageTk.PhotoImage(img)
+            label_preview.config(image=img_tk)
+            label_preview.image = img_tk 
+
+    tk.Button(frame, text="Subir imagen",
+              font=("Impact", 12),
+              bg="yellow",
+              command=seleccionar_imagen).grid(row=3, column=0, pady=10)
+
+    label_imagen = tk.Label(frame, text="Ninguna imagen",
+                            font=("Impact", 12),
+                            bg="black", fg="white")
+    label_imagen.grid(row=3, column=1)
+
+    # 🚀 Guardar en Firebase
+    def enviar():
+        comentario = caja_texto.get("1.0", "end").strip()
+
+        if comentario == "":
+            messagebox.showerror("Error", "Escribe un comentario")
+            return
+
+        db.collection("COMENTARIOS").add({
+            "comentario": comentario,
+            "imagen": ruta_imagen["ruta"],
+            "fecha": datetime.now()
+        })
+
+        messagebox.showinfo("Éxito", "Comentario enviado")
+
+        caja_texto.delete("1.0", "end")
+        label_imagen.config(text="Ninguna imagen")
+        ruta_imagen["ruta"] = ""
+
+    tk.Button(frame, text="Enviar",
+              font=("Impact", 12),
+              bg="red", fg="white",
+              command=enviar).grid(row=4, column=0, columnspan=2, pady=10)
+    label_preview = tk.Label(frame, bg="black")
+    label_preview.grid(row=5, column=0, columnspan=2, pady=10)
 
 
     
@@ -442,41 +502,191 @@ def mostrar_ventana8(ventana):
     limpiar_ventana(ventana)
     crear_marco_superior(ventana)
     crear_imagenes_inferiores(ventana)
-    crear_botones(ventana, [True, True, True, True, True, True, True, True])
+    crear_botones(ventana, [True]*8)
 
-    global CONTRASENA
+    # 🔧 CONFIG GRID (IMPORTANTE PARA QUE SE VEAN LOS BOTONES)
+    ventana.grid_rowconfigure(3, weight=1)
+    ventana.grid_columnconfigure(0, weight=1)
+    ventana.grid_columnconfigure(1, weight=1)
 
-    tk.Label(ventana, text="Perfil del Proveedor", font=("Arial", 12)).grid(row=3, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Nombre: Javier").grid(row=4, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Apellido paterno: Garcia").grid(row=5, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Apellido materno: Perez").grid(row=6, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Distribuidora: Maquilladist").grid(row=7, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Numero de telefono: 2213753278").grid(row=8, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Correo electronico: garciaperezjavier.cb260@gmail.com").grid(row=9, column=0, columnspan=3, padx=50, pady=10)
-    tk.Label(ventana, text="Fecha en la que se unio: 01/09/2025").grid(row=10, column=0, columnspan=3, padx=50, pady=10)
+    frame = tk.Frame(ventana, bg="black")
+    frame.grid(row=3, column=0, columnspan=2, pady=20, sticky="n")
 
-    tk.Label(ventana, text="Cambiar contraseña").grid(row=11, column=0, columnspan=2, pady=10)
+    # 🔽 OBTENER DATOS
+    try:
+        doc_ref = db.collection("PERFIL").document("perfil")
+        doc = doc_ref.get()
 
-    tk.Label(ventana, text="Nueva contraseña:").grid(row=12, column=0, pady=10)
+        if not doc.exists:
+            messagebox.showerror("Error", "No existe el perfil")
+            return
 
+        data = doc.to_dict()
 
-    nueva_pass = ttk.Entry(ventana, width=20)
-    nueva_pass.grid(row=12, column=1, pady=10)
+    except Exception as e:
+        messagebox.showerror("Error", f"Error de conexión: {e}")
+        return
 
-    
-    def guardar_contraseña():
-        nueva = nueva_pass.get().strip()
+    nombre = data.get("Nombre", "N/A")
+    edad = data.get("Edad", "0")
+    telefono = data.get("Telefono", "0")
+    horario = data.get("Horario", "No definido")
+    foto = data.get("Fotografia", "")
 
-        if nueva == "":
-            messagebox.showerror("Error", "La contraseña no puede estar vacía")
-            return   
+    # 🧾 LABELS
+    estilo = {"bg": "black", "fg": "white", "font": ("Impact", 12)}
 
-    
-        CONTRASENA.set(nueva)
+    tk.Label(frame, text="PERFIL", font=("Impact", 16),
+             bg="black", fg="gold").grid(row=0, column=0, columnspan=2, pady=10)
 
-        messagebox.showinfo("Éxito", "Contraseña guardada correctamente")
+    tk.Label(frame, text=f"Nombre: {nombre}", **estilo).grid(row=1, column=0, columnspan=2)
+    tk.Label(frame, text=f"Edad: {edad}", **estilo).grid(row=2, column=0, columnspan=2)
+    tk.Label(frame, text=f"Teléfono: {telefono}", **estilo).grid(row=3, column=0, columnspan=2)
+    tk.Label(frame, text=f"Horario: {horario}", **estilo).grid(row=4, column=0, columnspan=2)
+    tk.Label(frame, text="Fotografia del entrenador:", **estilo).grid(row=5, column=0, columnspan=2)
 
-    ttk.Button(ventana, text="Guardar", command=guardar_contraseña).grid(row=13, column=0, columnspan=2, pady=10)
+    # 🖼️ IMAGEN
+    label_img = tk.Label(frame, bg="black")
+    label_img.grid(row=6, column=0, columnspan=2, pady=10)
+
+    def cargar_imagen(ruta, label):
+        if not ruta:
+            label.config(text="Sin imagen", fg="gray")
+            return
+
+        if not os.path.exists(ruta):
+            label.config(text="Ruta no encontrada", fg="red")
+            return
+
+        try:
+            img = Image.open(ruta)
+            img = img.resize((120, 120))
+            img_tk = ImageTk.PhotoImage(img)
+
+            label.config(image=img_tk, text="")
+            label.image = img_tk
+        except:
+            label.config(text="Error al cargar imagen", fg="red")
+
+    cargar_imagen(foto, label_img)
+
+    # 🔐 CAMBIAR CONTRASEÑA
+    def cambiar_contrasena():
+        ventana_pass = tk.Toplevel(ventana)
+        ventana_pass.title("Cambiar contraseña")
+        ventana_pass.geometry("300x220")
+
+        ventana_pass.transient(ventana)
+        ventana_pass.grab_set()
+
+        tk.Label(ventana_pass, text="Nueva contraseña").pack(pady=5)
+        entry1 = tk.Entry(ventana_pass, show="*")
+        entry1.pack(pady=5)
+
+        tk.Label(ventana_pass, text="Confirmar contraseña").pack(pady=5)
+        entry2 = tk.Entry(ventana_pass, show="*")
+        entry2.pack(pady=5)
+
+        def guardar():
+            if entry1.get() == "" or entry2.get() == "":
+                messagebox.showerror("Error", "Campos vacíos")
+                return
+
+            if entry1.get() != entry2.get():
+                messagebox.showerror("Error", "No coinciden")
+                return
+
+            db.collection("CONTRASEÑA").document("contraseña").update({
+                "contraseña": entry1.get()
+            })
+
+            messagebox.showinfo("Éxito", "Contraseña actualizada")
+            ventana_pass.destroy()
+
+        tk.Button(ventana_pass, text="Guardar", bg="green", fg="white",
+                  command=guardar).pack(pady=15)
+
+    # ✏️ MODIFICAR PERFIL
+    def modificar_perfil():
+        ventana_editar = tk.Toplevel(ventana)
+        ventana_editar.title("Modificar perfil")
+        ventana_editar.geometry("350x550")
+
+        ventana_editar.transient(ventana)
+        ventana_editar.grab_set()
+
+        ruta_temp = [foto]
+
+        campos = {
+            "Nombre": nombre,
+            "Edad": edad,
+            "Teléfono": telefono,
+            "Horario": horario
+        }
+
+        entries = {}
+
+        for campo, valor in campos.items():
+            tk.Label(ventana_editar, text=campo).pack()
+            e = tk.Entry(ventana_editar)
+            e.insert(0, valor)
+            e.pack(pady=2)
+            entries[campo] = e
+
+        label_img_edit = tk.Label(ventana_editar)
+        label_img_edit.pack(pady=10)
+        cargar_imagen(ruta_temp[0], label_img_edit)
+
+        def seleccionar_imagen():
+            ruta = filedialog.askopenfilename(
+                parent=ventana_editar,
+                title="Seleccionar imagen",
+                filetypes=[("Imágenes", "*.jpg *.png *.jpeg *.webp")]
+            )
+
+            if ruta:
+                ruta_temp[0] = ruta
+                cargar_imagen(ruta, label_img_edit)
+
+            ventana_editar.lift()
+            ventana_editar.focus_force()
+
+        tk.Button(ventana_editar, text="Cambiar imagen",
+                  command=seleccionar_imagen).pack(pady=5)
+
+        def guardar():
+            try:
+                nuevos = {
+                    "Nombre": entries["Nombre"].get(),
+                    "Edad": int(entries["Edad"].get()),
+                    "Telefono": int(entries["Teléfono"].get()),
+                    "Horario": entries["Horario"].get(),
+                    "Fotografia": ruta_temp[0]
+                }
+
+                db.collection("PERFIL").document("perfil").update(nuevos)
+
+                messagebox.showinfo("Éxito", "Perfil actualizado")
+                ventana_editar.destroy()
+                mostrar_ventana8(ventana)
+
+            except:
+                messagebox.showerror("Error", "Datos inválidos")
+
+        tk.Button(ventana_editar, text="Guardar cambios",
+                  bg="green", fg="white",
+                  command=guardar).pack(pady=15)
+
+    # 🔘 BOTONES
+    tk.Button(frame, text="Cambiar contraseña",
+              font=("Impact", 12),
+              bg="yellow",
+              command=cambiar_contrasena).grid(row=7, column=0, padx=5, pady=20)
+
+    tk.Button(frame, text="Modificar perfil",
+              font=("Impact", 12),
+              bg="red", fg="white",
+              command=modificar_perfil).grid(row=7, column=1, padx=5, pady=20)
 
 if __name__ == "__main__":
     mostrar_ventana1()
